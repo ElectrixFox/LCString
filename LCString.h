@@ -1,0 +1,140 @@
+#ifndef LCSTRING_H
+#define LCSTRING_H
+
+#pragma once
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define string char*
+
+#ifndef LCSTRING_HEADERONLY
+
+#define out(str) printf("\n%s", str)
+
+// Preappend destination into source.
+void Preappend(string destination, string* source);
+
+// Replaces X in source with Y
+void Replace(string X, string source, string Y);
+
+// Returns a substring from x to y in source 
+string SubString(int x, string source, int y);
+
+// Returns the first index of the word in source
+int Find(string word, string source);
+
+// Exactly the same as normal find but starting at index n
+int Find_n(string word, string source, int n);
+
+// Removes all characters from min to max
+void Remove(string* source, int min, int max);
+
+// Gets all of the characters to the left of index
+string Left(string source, int index);
+
+// Gets all of the characters to the right of index
+string Right(string source, int index);
+
+// Inserts word at index in source
+void Insert(string word, int index, string* source);
+
+
+#else
+
+// Preappend destination into source.
+void Preappend(string destination, string* source)
+{
+    {
+        // New temp string to store the origional source safely during allocation.
+        string temp = *source;
+        *source = malloc(sizeof(string) * 128);
+
+        // Coppies the origional source into the new allocted source.
+        strcpy(*source, temp);
+    }
+
+    // A separate variable just for derefferenced source so that I don't have to dereff it every time.
+    string n_source = *source;
+    
+    // String to preappend
+    const string n_str = destination;
+    
+    // Move the origional string that many moves to the right so something can be moved before it.
+    int str_len = strlen(n_str);
+
+    // Add one because for some reason it stops corruption.
+    memmove(n_source + str_len, n_source, strlen(n_source) + 1);
+
+    // Coppies the new string into the begining of the old one.
+    memcpy(n_source, n_str, str_len);
+}
+
+// Replaces X in source with Y
+void Replace(string X, string source, string Y) 
+{
+    int x_len = strlen(X);
+
+    // Find the location of X in source
+    int location = Find(X, source);
+
+    // Coppies Y into source from location onwards for x length
+    memcpy(&source[location], Y, x_len);
+}
+
+// Returns a substring from x to y in source 
+string SubString(int x, string source, int y) 
+{
+    int n_len = y - x;
+    string Substr = malloc(sizeof(string) * n_len);
+
+    // Coppies from x in source to the length of the substring determined by y - x 
+    memcpy(Substr, &source[x], y-x);
+
+    // Null terminator to stop corruption
+    Substr[y-x] = '\0';
+
+    return Substr;
+}
+
+// Returns the first index of the word in source
+int Find(string word, string source) 
+{
+    int Length = strlen(word);
+
+    int index = 0;
+    // Through the length of the source checking
+    for (int i = 0; i < strlen(source); i++)
+    {
+        // Compares a substring from i to the words length in source to the actual word.
+        if(!strcmp(SubString(i, source, i+Length), word))
+        {
+            index = i;
+            break;
+        }
+    }
+
+    return index;
+}
+
+// Exactly the same as normal find but starting at index n
+int Find_n(string word, string source, int n) 
+{
+    int Length = strlen(word);
+    int index = 0;
+
+    for (int i = n; i < strlen(source); i++)
+    {
+        if(!strcmp(SubString(i, source, i+Length), word))
+        {
+            index = i;
+            break;
+        }
+    }
+
+    return index;
+}
+
+#endif
+
+#endif
