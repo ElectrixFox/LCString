@@ -1,22 +1,22 @@
 #pragma once
 #include <LCString.h>
 
-void Preappend(string destination, string* source)
+void Preappend(LCstring destination, LCstring* source)
 {
     {
         // New temp string to store the origional source safely during allocation.
-        string temp = *source;
-        *source = malloc(sizeof(string) * 128);
+        LCstring temp = *source;
+        *source = malloc(sizeof(LCstring) * 128);
 
         // Coppies the origional source into the new allocted source.
         strcpy(*source, temp);
     }
 
     // A separate variable just for derefferenced source so that I don't have to dereff it every time.
-    string n_source = *source;
+    LCstring n_source = *source;
     
     // String to preappend
-    const string n_str = destination;
+    const LCstring n_str = destination;
     
     // Move the origional string that many moves to the right so something can be moved before it.
     int str_len = strlen(n_str);
@@ -28,7 +28,7 @@ void Preappend(string destination, string* source)
     memcpy(n_source, n_str, str_len);
 }
 
-void Replace(string X, string source, string Y) 
+void Replace(LCstring X, LCstring source, LCstring Y) 
 {
     int x_len = strlen(X);
 
@@ -39,10 +39,10 @@ void Replace(string X, string source, string Y)
     memcpy(&source[location], Y, x_len);
 }
 
-string SubString(int x, string source, int y) 
+LCstring SubString(int x, LCstring source, int y) 
 {
     int n_len = y - x;
-    string Substr = malloc(sizeof(string) * n_len);
+    LCstring Substr = malloc(sizeof(LCstring) * n_len);
 
     // Coppies from x in source to the length of the substring determined by y - x 
     memcpy(Substr, &source[x], y-x);
@@ -53,7 +53,7 @@ string SubString(int x, string source, int y)
     return Substr;
 }
 
-int Find(string word, string source) 
+int Find(LCstring word, LCstring source) 
 {
     int Length = strlen(word);
 
@@ -72,7 +72,7 @@ int Find(string word, string source)
     return index;
 }
 
-int Find_n(string word, string source, int n) 
+int Find_n(LCstring word, LCstring source, int n) 
 {
     int Length = strlen(word);
     int index = 0;
@@ -89,40 +89,40 @@ int Find_n(string word, string source, int n)
     return index;
 }
 
-void Remove(string* source, int min, int max) 
+void Remove(LCstring* source, int min, int max) 
 {
     int n_len = max - min;
 
     // Litterally just a little thing that I've found to work for fixing strings.
     {
         // New temp string to store the origional source safely during allocation.
-        string temp = *source;
-        *source = malloc(sizeof(string) * 128);
+        LCstring temp = *source;
+        *source = malloc(sizeof(LCstring) * 128);
 
         // Coppies the origional source into the new allocted source.
         strcpy(*source, temp);
     }
 
-    string n_source = *source;
+    LCstring n_source = *source;
     
     // This starts the source at min and then inserts maximum for the length of the source - the length add one
     // Even this kind of confuses me
     memmove(&n_source[min], &n_source[max], strlen(n_source) - n_len + 1);
 }
 
-string Left(string source, int index) 
+LCstring Left(LCstring source, int index) 
 {
     return SubString(0, source, index);
 }
 
-string Right(string source, int index) 
+LCstring Right(LCstring source, int index) 
 {
     return SubString(index, source, strlen(source));
 }
 
-void Insert(string word, int index, string* source) 
+void Insert(LCstring word, int index, LCstring* source) 
 {
-    string temp = *source;
-    *source = malloc(sizeof(string) * 128);
+    LCstring temp = *source;
+    *source = malloc(sizeof(LCstring) * 128);
     strcpy(*source, temp);
 }

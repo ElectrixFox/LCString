@@ -6,38 +6,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define string char*
+#define LCstring char*
 
 #ifndef LCSTRING_HEADERONLY
 
 #define out(str) printf("\n%s", str)
 
 // Preappend destination into source.
-void Preappend(string destination, string* source);
+void Preappend(LCstring destination, LCstring* source);
 
 // Replaces X in source with Y
-void Replace(string X, string source, string Y);
+void Replace(LCstring X, LCstring source, LCstring Y);
 
 // Returns a substring from x to y in source 
-string SubString(int x, string source, int y);
+LCstring SubString(int x, LCstring source, int y);
 
 // Returns the first index of the word in source
-int Find(string word, string source);
+int Find(LCstring word, LCstring source);
 
 // Exactly the same as normal find but starting at index n
-int Find_n(string word, string source, int n);
+int Find_n(LCstring word, LCstring source, int n);
 
 // Removes all characters from min to max
-void Remove(string* source, int min, int max);
+void Remove(LCstring* source, int min, int max);
 
 // Gets all of the characters to the left of index
-string Left(string source, int index);
+LCstring Left(LCstring source, int index);
 
 // Gets all of the characters to the right of index
-string Right(string source, int index);
+LCstring Right(LCstring source, int index);
 
 // Inserts word at index in source
-void Insert(string word, int index, string* source);
+void Insert(LCstring word, int index, LCstring* source);
 
 
 #else
