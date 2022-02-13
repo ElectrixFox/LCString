@@ -14,6 +14,9 @@
 #define out_v(x) printf("%s: %d\n", #x, x)
 #define out_s(x) printf("%s: %s\n", #x, x)
 
+// Just an append function. It appends str onto source.
+void Append(LCstring str, LCstring* source);
+
 // Preappend destination into source.
 void Preappend(LCstring destination, LCstring* source);
 

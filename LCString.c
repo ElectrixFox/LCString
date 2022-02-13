@@ -1,6 +1,27 @@
 #pragma once
 #include <LCString.h>
 
+void Append(LCstring str, LCstring* source) 
+{
+    // Allocates source to avoid not working.
+    LCstring temp = *source;
+    *source = malloc(sizeof(LCstring) * 128);
+    strcpy(*source, temp);
+
+    // Frees temp as it is no longer needed.
+    free(temp);
+
+    // Sets a n_source to the de reffed pointer to make it easier to read.
+    LCstring n_source = *source;
+
+    const LCstring n_str = str;
+
+    int str_len = strlen(n_str);
+
+    // Adds n_str onto the string at the end of n_source (because it is coppied at the length of n_source)
+    memcpy(n_source + strlen(n_source), n_str, str_len);
+}
+
 void Preappend(LCstring destination, LCstring* source)
 {
     {
