@@ -39,6 +39,15 @@ LCstring Right(LCstring source, int index);
 // Inserts word at index in source
 void Insert(LCstring word, int index, LCstring* source);
 
+// Changes string to lowercase.
+extern inline void Lower(LCstring string);
+
+// Changes string to uppercase.
+extern inline void Upper(LCstring string);
+
+// Returns the strings length.
+extern inline int Length(LCstring string);
+
 
 #else
 

@@ -126,3 +126,18 @@ void Insert(LCstring word, int index, LCstring* source)
     *source = malloc(sizeof(LCstring) * 128);
     strcpy(*source, temp);
 }
+
+extern inline void Lower(LCstring string) 
+{
+    strlwr(string);
+}
+
+extern inline void Upper(LCstring string) 
+{
+    strupr(string);
+}
+
+extern inline int Length(LCstring string) 
+{
+    return strlen(string);
+}
