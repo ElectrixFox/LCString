@@ -110,6 +110,36 @@ int Find_n(LCstring word, LCstring source, int n)
     return index;
 }
 
+int FindAllOccurrences(LCstring word, LCstring source)
+{
+    int count = 0;
+
+    int len = Length(source);
+    int w_len = Length(word);
+
+    out_v(len);
+
+    int index = 0;
+
+    for (int i = 0; i < len; i++)
+    {
+        if(Find_n(word, source, index))
+        {
+            out_v(Find_n(word, source, index));
+            index = Find_n(word, source, index);
+            out_s(source[index]);
+
+            count++;
+            index += w_len;
+
+        }
+    }
+    
+    
+
+    return count;
+}
+
 void Remove(LCstring* source, int min, int max) 
 {
     int n_len = max - min;
@@ -174,4 +204,37 @@ void SetSpecial(LCstring source, LCstring destination)
     LCstring n_source = source;
     source = malloc(sizeof(char*) * Length(destination));
     strcpy(source, destination);
+}
+
+void Issolated(char* word)
+{
+        char* test_W = "Hellow people";
+        char* temp = test_W;
+        test_W = malloc(sizeof(char*) * 128);
+        strcpy(test_W, temp);
+
+        out_s(test_W);
+
+        memmove(test_W + strlen(word), test_W, strlen(test_W));
+        out_s(test_W);
+}
+
+void AddPadding(LCstring* source, char* character, int thickness) 
+{
+    LCstring temp = *source;
+    *source = malloc(sizeof(char*) * 128 * thickness);
+    strcpy(*source, temp);
+
+    out_s(*source);
+
+    LCstring n_word = *source;
+
+    LCstring s_str = character;
+
+    out_s(n_word);
+
+    memmove(n_word + 2, n_word, strlen(n_word) + 1);
+
+    //memmove(n_word + thickness, n_word, strlen(n_word) + 1);
+    out(n_word);
 }

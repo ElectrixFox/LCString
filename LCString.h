@@ -10,7 +10,9 @@
 
 #ifndef LCSTRING_HEADERONLY
 
-#define out(str) printf("\n%s", str)
+#define out(str) printf("%s\n", str)
+#define out_v(x) printf("%s: %d\n", #x, x)
+#define out_s(x) printf("%s: %s\n", #x, x)
 
 // Preappend destination into source.
 void Preappend(LCstring destination, LCstring* source);
@@ -27,6 +29,10 @@ int Find(LCstring word, LCstring source);
 
 // Exactly the same as normal find but starting at index n
 int Find_n(LCstring word, LCstring source, int n);
+
+// Returns how many of word are in source. 
+// NOTE: Could rename function to FindAll or How_Many
+int FindAllOccurrences(LCstring word, LCstring source);
 
 // Removes all characters from min to max
 void Remove(LCstring* source, int min, int max);
@@ -54,6 +60,9 @@ void Replace_Range(LCstring source, int min, int max, char p);
 
 // Sets the specified string(source) to another string(destination).
 void SetSpecial(LCstring source, LCstring destination);
+
+// Adds padding of thickness amount of character arround word
+void AddPadding(LCstring* source, char* character, int thickness);
 
 
 #else
