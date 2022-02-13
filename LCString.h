@@ -15,8 +15,9 @@
 // Preappend destination into source.
 void Preappend(LCstring destination, LCstring* source);
 
-// Replaces X in source with Y
-void Replace(LCstring X, LCstring source, LCstring Y);
+// Replaces X in source with Y 
+// NOTE: Only works with allocated (malloc) variables at the moment.
+void Replace(LCstring X, LCstring* source, LCstring Y);
 
 // Returns a substring from x to y in source 
 LCstring SubString(int x, LCstring source, int y);
@@ -47,6 +48,12 @@ extern inline void Upper(LCstring string);
 
 // Returns the strings length.
 extern inline int Length(LCstring string);
+
+// Replaces characters in range min to max within string source with character p.
+void Replace_Range(LCstring source, int min, int max, char p);
+
+// Sets the specified string(source) to another string(destination).
+void SetSpecial(LCstring source, LCstring destination);
 
 
 #else

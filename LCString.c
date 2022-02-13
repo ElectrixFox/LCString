@@ -28,15 +28,36 @@ void Preappend(LCstring destination, LCstring* source)
     memcpy(n_source, n_str, str_len);
 }
 
-void Replace(LCstring X, LCstring source, LCstring Y) 
+void Replace(LCstring X, LCstring* source, LCstring Y) 
 {
+    {
+        // Creates a new temp variable to that source can be allocated memory.
+        LCstring temp = *source;
+        *source = malloc(sizeof(char*) * 128);
+
+        // Coppies temp into the new allocated source.
+        strcpy(*source, temp);
+
+        // Clears temp as it is no longer needed.
+        free(temp);
+    }
+
+    // Allocates a new variable for using
+    LCstring t_str = malloc(sizeof(char*) * 128);
+
+    // Coppies source into it so that t_str can act like source.
+    strcpy(t_str, *source);
+
     int x_len = strlen(X);
 
     // Find the location of X in source
-    int location = Find(X, source);
+    int location = Find(X, t_str);
 
     // Coppies Y into source from location onwards for x length
-    memcpy(&source[location], Y, x_len);
+    memcpy(&t_str[location], Y, x_len);
+
+    // Sets source to t_str.
+    *source = t_str;
 }
 
 LCstring SubString(int x, LCstring source, int y) 
@@ -140,4 +161,17 @@ extern inline void Upper(LCstring string)
 extern inline int Length(LCstring string) 
 {
     return strlen(string);
+}
+
+void Replace_Range(LCstring source, int min, int max, char p) 
+{
+    for (int i = min; i < max; i++)
+        source[i] = p;
+}
+
+void SetSpecial(LCstring source, LCstring destination) 
+{
+    LCstring n_source = source;
+    source = malloc(sizeof(char*) * Length(destination));
+    strcpy(source, destination);
 }
