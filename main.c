@@ -13,13 +13,10 @@ int main(int argc, char* argv[])
     LCstring source = "The time, the light, the end, there is no end.";
 
     LCstring word = "the";
-
-    Append(word, &hw);
     out_s(hw);
-    //AddPadding(&word, "0", 8);
 
-    //int count = 0;//FindAllOccurrences(word, source);
+    int count = FindAllOccurrences(word, source);
 
-    //printf("There are %d %s's", count, word);
+    printf("There are %d %s's", count, word);
     return 0;
 }

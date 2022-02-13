@@ -227,35 +227,19 @@ void SetSpecial(LCstring source, LCstring destination)
     strcpy(source, destination);
 }
 
-void Issolated(char* word)
-{
-        char* test_W = "Hellow people";
-        char* temp = test_W;
-        test_W = malloc(sizeof(char*) * 128);
-        strcpy(test_W, temp);
-
-        out_s(test_W);
-
-        memmove(test_W + strlen(word), test_W, strlen(test_W));
-        out_s(test_W);
-}
-
 void AddPadding(LCstring* source, char* character, int thickness) 
 {
     LCstring temp = *source;
-    *source = malloc(sizeof(char*) * 128 * thickness);
+    *source = malloc(sizeof(LCstring) * 128);
     strcpy(*source, temp);
 
-    out_s(*source);
+    LCstring n_source = *source;
 
-    LCstring n_word = *source;
+    for (int i = 0; i < thickness; i++)
+    {
+        Preappend(character, &n_source);
+        Append(character, &n_source);
+    }
 
-    LCstring s_str = character;
-
-    out_s(n_word);
-
-    memmove(n_word + 2, n_word, strlen(n_word) + 1);
-
-    //memmove(n_word + thickness, n_word, strlen(n_word) + 1);
-    out(n_word);
+    *source = n_source;
 }
