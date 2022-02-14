@@ -13,6 +13,7 @@
 #define out(str) printf("%s\n", str)
 #define out_v(x) printf("%s: %d\n", #x, x)
 #define out_s(x) printf("%s: %s\n", #x, x)
+#define out_c(x) printf("%s: %c\n", #x, x)
 
 // Just an append function. It appends str onto source.
 void Append(LCstring str, LCstring* source);

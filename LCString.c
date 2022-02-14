@@ -19,7 +19,7 @@ void Append(LCstring str, LCstring* source)
     int str_len = strlen(n_str);
 
     // Adds n_str onto the string at the end of n_source (because it is coppied at the length of n_source)
-    memcpy(n_source + strlen(n_source), n_str, str_len);
+    memcpy(n_source + strlen(n_source), n_str, str_len + 1);
 }
 
 void Preappend(LCstring destination, LCstring* source)
@@ -134,25 +134,35 @@ int Find_n(LCstring word, LCstring source, int n)
 int FindAllOccurrences(LCstring word, LCstring source)
 {
     int count = 0;
+    LCstring temp = malloc(sizeof(char*) * 128);
+    strcpy(temp, word);
+    AddPadding(&temp, " ", 1);
+
+    LCstring n_word = temp;
 
     int len = Length(source);
-    int w_len = Length(word);
+    int w_len = Length(n_word);
 
     out_v(len);
+    out_s(n_word);
+    out_s(source);
 
     int index = 0;
 
     for (int i = 0; i < len; i++)
     {
-        if(Find_n(word, source, index))
+        if(Find_n(n_word, source, index))
         {
-            out_v(Find_n(word, source, index));
-            index = Find_n(word, source, index);
-            out_s(source[index]);
-
+            index = Find_n(n_word, source, index) + w_len;
             count++;
-            index += w_len;
 
+            out_v(index-w_len);
+            out_c(source[index-w_len]);
+            out_s(SubString(index-w_len, source, index));
+        }
+        else
+        {
+            break;
         }
     }
     
@@ -240,6 +250,7 @@ void AddPadding(LCstring* source, char* character, int thickness)
         Preappend(character, &n_source);
         Append(character, &n_source);
     }
+    Append("\0", &n_source);
 
     *source = n_source;
 }

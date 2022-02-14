@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     LCstring hw = "Hello World!";
     LCstring source = "The time, the light, the end, there is no end.";
 
-    LCstring word = "the";
+    LCstring word = "The";
     out_s(hw);
 
     int count = FindAllOccurrences(word, source);
