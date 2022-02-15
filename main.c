@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     LCstring x = "World!";
     LCstring y = "Hello ";
     LCstring hw = "Hello World!";
-    LCstring source = "The time, the light, the end, there is no end.";
+    LCstring source = "The time, the light, the end, there is no end. The";
 
     LCstring word = "The";
     out_s(hw);

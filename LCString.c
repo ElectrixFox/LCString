@@ -99,7 +99,7 @@ int Find(LCstring word, LCstring source)
 {
     int Length = strlen(word);
 
-    int index = 0;
+    int index = -1;
     // Through the length of the source checking
     for (int i = 0; i < strlen(source); i++)
     {
@@ -117,7 +117,7 @@ int Find(LCstring word, LCstring source)
 int Find_n(LCstring word, LCstring source, int n) 
 {
     int Length = strlen(word);
-    int index = 0;
+    int index = -1;
 
     for (int i = n; i < strlen(source); i++)
     {
@@ -136,7 +136,7 @@ int FindAllOccurrences(LCstring word, LCstring source)
     int count = 0;
     LCstring temp = malloc(sizeof(char*) * 128);
     strcpy(temp, word);
-    AddPadding(&temp, " ", 1);
+    //AddPadding(&temp, " ", 1);
 
     LCstring n_word = temp;
 
@@ -151,14 +151,34 @@ int FindAllOccurrences(LCstring word, LCstring source)
 
     for (int i = 0; i < len; i++)
     {
-        if(Find_n(n_word, source, index))
-        {
-            index = Find_n(n_word, source, index) + w_len;
-            count++;
+        int Find_IX = Find_n(n_word, source, index);
 
-            out_v(index-w_len);
-            out_c(source[index-w_len]);
-            out_s(SubString(index-w_len, source, index));
+        if(Find_IX != -1)
+        {
+            // Checks if previous character is a begining a null character or a space if not then it terminates it.
+            if(!(source[Find_IX - 1] == 2 ||
+                source[Find_IX - 1] == 0 ||
+                source[Find_IX - 1] == 32))
+            {
+                out_v(source[Find_IX + w_len]);
+
+                break;
+            }
+            // Checks if next character is a begining a null character or a space if not then it terminates it.
+            if(!(source[Find_IX + w_len] == 2 ||
+                    source[Find_IX + w_len] == 0 || 
+                    source[Find_IX + w_len] == 32))
+                {
+                    out_v(source[Find_IX + w_len]);
+                    break;
+                }
+            
+            count++;
+            index = Find_IX + w_len;
+
+            //out_v(index-w_len);
+            //out_c(source[index-w_len]);
+            //out_s(SubString(index-w_len, source, index));
         }
         else
         {
