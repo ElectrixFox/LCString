@@ -1,6 +1,8 @@
 #pragma once
 #include <LCString.h>
 
+// MAKE SURE YOU CHECK THE NULL CHARACTER WHENEVER THERE IS AN ISSUE.
+
 void Append(LCstring str, LCstring* source) 
 {
     // Allocates source to avoid not working.
@@ -20,8 +22,6 @@ void Append(LCstring str, LCstring* source)
 
     // Adds n_str onto the string at the end of n_source (because it is coppied at the length of n_source)
     memcpy(n_source + strlen(n_source), n_str, str_len + 1);
-
-    n_source[0] =  '\0';
 }
 
 void Preappend(LCstring destination, LCstring* source)
