@@ -20,6 +20,8 @@ void Append(LCstring str, LCstring* source)
 
     // Adds n_str onto the string at the end of n_source (because it is coppied at the length of n_source)
     memcpy(n_source + strlen(n_source), n_str, str_len + 1);
+
+    n_source[0] =  '\0';
 }
 
 void Preappend(LCstring destination, LCstring* source)
@@ -47,6 +49,8 @@ void Preappend(LCstring destination, LCstring* source)
 
     // Coppies the new string into the begining of the old one.
     memcpy(n_source, n_str, str_len);
+
+    n_source[0] =  '\0';
 }
 
 void Replace(LCstring X, LCstring* source, LCstring Y) 
@@ -210,6 +214,8 @@ void Remove(LCstring* source, int min, int max)
     // This starts the source at min and then inserts maximum for the length of the source - the length add one
     // Even this kind of confuses me
     memmove(&n_source[min], &n_source[max], strlen(n_source) - n_len + 1);
+
+    n_source[0] =  '\0';
 }
 
 LCstring Left(LCstring source, int index) 
@@ -227,6 +233,7 @@ void Insert(LCstring word, int index, LCstring* source)
     LCstring temp = *source;
     *source = malloc(sizeof(LCstring) * 128);
     strcpy(*source, temp);
+    *source[0] =  '\0';
 }
 
 extern inline void Lower(LCstring string) 
