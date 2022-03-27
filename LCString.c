@@ -49,8 +49,6 @@ void Preappend(LCstring destination, LCstring* source)
 
     // Coppies the new string into the begining of the old one.
     memcpy(n_source, n_str, str_len);
-
-    n_source[0] =  '\0';
 }
 
 void Replace(LCstring X, LCstring* source, LCstring Y) 
