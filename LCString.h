@@ -41,6 +41,9 @@ int FindAllOccurrences(LCstring word, LCstring source);
 // Removes all characters from min to max
 void Remove(LCstring* source, int min, int max);
 
+// Appends word at the index in source.
+void AppendAt(LCstring* source, int index, LCstring word);
+
 // Gets all of the characters to the left of index
 LCstring Left(LCstring source, int index);
 

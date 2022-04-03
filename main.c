@@ -15,8 +15,18 @@ int main(int argc, char* argv[])
     LCstring word = "The";
     out_s(hw);
 
-    int count = FindAllOccurrences(word, source);
+    char* all = SubString(0, source, 5);
+    printf("All: %s\n", all);
 
-    printf("There are %d %s's", count, word);
+    //Remove(&source, 2, 5);
+
+    Replace("light", &source, "ti");
+    //AppendAt(&source, 20, "helll");
+    printf("Source: %s", source);
+
+
+    //int count = FindAllOccurrences(word, source);
+
+    //printf("There are %d %s's", count, word);
     return 0;
 }

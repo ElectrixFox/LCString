@@ -76,8 +76,19 @@ void Replace(LCstring X, LCstring* source, LCstring Y)
     // Find the location of X in source
     int location = Find(X, t_str);
 
+    // Removes all the characters from the begining location to the length of the word.
+    Remove(&t_str, location, location + x_len);
+
+    char* whitespace = malloc(sizeof(char*) * 128);
+    memcpy(whitespace, " ", x_len);
+
+    AppendAt(&t_str, location, whitespace);
+
+    // Inserts the word at the location
+    Insert(Y, location, &t_str);
+
     // Coppies Y into source from location onwards for x length
-    memcpy(&t_str[location], Y, x_len);
+    //memcpy(&t_str[location], Y, x_len);
 
     // Sets source to t_str.
     *source = t_str;
@@ -145,9 +156,9 @@ int FindAllOccurrences(LCstring word, LCstring source)
     int len = Length(source);
     int w_len = Length(n_word);
 
-    out_v(len);
-    out_s(n_word);
-    out_s(source);
+    //out_v(len);
+    //out_s(n_word);
+    //out_s(source);
 
     int index = 0;
 
@@ -162,7 +173,7 @@ int FindAllOccurrences(LCstring word, LCstring source)
                 source[Find_IX - 1] == 0 ||
                 source[Find_IX - 1] == 32))
             {
-                out_v(source[Find_IX + w_len]);
+                //out_v(source[Find_IX + w_len]);
 
                 break;
             }
@@ -171,7 +182,7 @@ int FindAllOccurrences(LCstring word, LCstring source)
                     source[Find_IX + w_len] == 0 || 
                     source[Find_IX + w_len] == 32))
                 {
-                    out_v(source[Find_IX + w_len]);
+                    //out_v(source[Find_IX + w_len]);
                     break;
                 }
             
@@ -213,7 +224,24 @@ void Remove(LCstring* source, int min, int max)
     // Even this kind of confuses me
     memmove(&n_source[min], &n_source[max], strlen(n_source) - n_len + 1);
 
-    n_source[0] =  '\0';
+    n_source[strlen(n_source)] = '\0';
+}
+
+void AppendAt(LCstring* source, int index, LCstring word)
+{
+    LCstring temp = *source;
+    *source = malloc(sizeof(char*) * 128);
+    strcpy(*source, temp);
+
+    int w_len = strlen(word);
+
+    char* lm = malloc(sizeof(char*) * 128);
+
+    lm = Right(*source, index);
+    Remove(source, index, strlen(*source));
+
+    Append(word, source);
+    Append(lm, source);
 }
 
 LCstring Left(LCstring source, int index) 
@@ -230,8 +258,15 @@ void Insert(LCstring word, int index, LCstring* source)
 {
     LCstring temp = *source;
     *source = malloc(sizeof(LCstring) * 128);
+
+    // Copies source into temp
     strcpy(*source, temp);
-    *source[0] =  '\0';
+
+    // Null characer at the end to avoid coruption
+    *source[strlen(source)] = '\0';
+
+    // Copies the word in at the index
+    memcpy(*source+index, word, strlen(word));
 }
 
 extern inline void Lower(LCstring string) 
