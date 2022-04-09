@@ -1,5 +1,5 @@
 #pragma once
-#include <LCString.h>
+#include "LCString.h"
 
 // MAKE SURE YOU CHECK THE NULL CHARACTER WHENEVER THERE IS AN ISSUE.
 
@@ -271,12 +271,12 @@ void Insert(LCstring word, int index, LCstring* source)
 
 extern inline void Lower(LCstring string) 
 {
-    strlwr(string);
+//    strlwr(string);
 }
 
 extern inline void Upper(LCstring string) 
 {
-    strupr(string);
+//    strupr(string);
 }
 
 extern inline int Length(LCstring string) 

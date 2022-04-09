@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
-#include <LCString.h>
+#include "LCString.h"
 
 int main(int argc, char* argv[])
 {

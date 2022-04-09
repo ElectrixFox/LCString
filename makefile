@@ -20,7 +20,7 @@ all: $(OBJFILES)
 
 lib:
 	$(CXX) $(CXXFLAGS) -c -o obj/LCString.o LCString.c
-	ar rcs LCStr.lib obj/LCString.o
+	ar rcs libLCStr.a obj/LCString.o
 
 both: lib all
 
